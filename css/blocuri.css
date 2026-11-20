@@ -1,0 +1,1526 @@
+/* Valoris — blocurile de continut. */
+
+/* ---------- Titluri si text curent ---------- */
+
+.supratitlu {
+  font-size: var(--t-mic);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--eticheta);
+  margin-bottom: var(--sp-24);
+}
+
+.titlu-pagina {
+  font-size: var(--t-7);
+  line-height: var(--lh-mare);
+  max-width: 21ch;
+  /* Fara echilibrare, un titlu lung lasa un cuvant singur pe rand. */
+  text-wrap: balance;
+}
+
+.titlu-sectiune {
+  font-size: var(--t-5);
+  max-width: 30ch;
+  /* Echilibreaza randurile, ca sa nu ramana cuvinte de doua litere la capat. */
+  text-wrap: balance;
+  margin-bottom: var(--sp-32);
+}
+
+.introducere {
+  font-size: var(--t-3);
+  line-height: var(--lh-mediu);
+  max-width: var(--masura);
+  color: var(--cerneala);
+}
+
+/* Pe ecran ingust, 22 px ocupa prea multe randuri ca sa se citeasca dintr-o
+   privire. Se coboara la 19, restul ierarhiei ramane neschimbat. */
+@media (max-width: 700px) {
+  .introducere { font-size: var(--t-2); }
+}
+
+.proza > * + * { margin-top: var(--sp-24); }
+.proza p { max-width: var(--masura); }
+
+.proza-mica { font-size: var(--t-05); color: var(--cerneala-stinsa); max-width: var(--masura); }
+
+/* ---------- Frontispiciu ---------- */
+
+.frontispiciu {
+  padding-block: var(--sp-128) var(--sp-96);
+  border-bottom: 1px solid var(--linie);
+}
+
+.frontispiciu .introducere { margin-top: var(--sp-40); }
+
+/*
+  Pe telefon frontispiciul se stramteaza pe verticala. Ecranul are 812 px, iar
+  intre antet si titlu incapea prea mult aer gol: supratitlul pornea abia la
+  228. Cu antetul scurtat si cu spatiile de aici, titlul, introducerea,
+  indemnurile si motto-ul intra toate in prima privire.
+*/
+@media (max-width: 900px) {
+  .frontispiciu { padding-block: var(--sp-40) var(--sp-48); }
+  .frontispiciu .supratitlu { margin-bottom: var(--sp-16); }
+  .frontispiciu .introducere { margin-top: var(--sp-24); }
+  .frontispiciu .motto { margin-top: var(--sp-40); }
+}
+
+/* Motto-ul de brand, sub indemnurile din frontispiciu. */
+.motto {
+  margin-top: var(--sp-64);
+  padding-top: var(--sp-24);
+  border-top: 1px solid var(--linie);
+  font-family: var(--serif);
+  font-size: var(--t-3);
+  color: var(--accent);
+  max-width: var(--masura);
+}
+
+/* ---------- Fondul frontispiciului ---------- */
+
+/*
+  Fotografia sta in spatele scrisului, nu langa el. Peste ea trece un voal de
+  crem, dens acolo unde e textul si aproape transparent in dreapta: asa
+  imaginea se vede, iar contrastul tusului pe crem ramane cel masurat, 16,17.
+  Imaginea e decorativa si nu poarta text alternativ; daca lipseste fisierul,
+  frontispiciul ramane pe crem simplu.
+*/
+.frontispiciu--fond {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  /* Filetul de sub frontispiciu dispare: capatul il face stingerea imaginii. */
+  border-bottom: 0;
+}
+
+.frontispiciu--fond::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background: var(--fond) center right / cover no-repeat;
+  /*
+    Imaginea se stinge in jos, in loc sa se termine cu o muchie. Fara masca,
+    intre ea si sectiunea urmatoare ramanea o linie dreapta pe toata latimea.
+  */
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 52%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 52%, transparent 100%);
+}
+
+.frontispiciu--fond::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    97deg,
+    var(--crem) 0%,
+    var(--crem) 26%,
+    rgba(242, 241, 238, 0.8) 47%,
+    rgba(242, 241, 238, 0.4) 66%,
+    rgba(242, 241, 238, 0) 88%
+  );
+}
+
+/*
+  Pe telefon fondul dispare de tot, si asta e o decizie, nu o scapare.
+
+  Pe latime mare imaginea are jumatatea dreapta pentru ea si nu atinge scrisul.
+  Pe un ecran de 375 px nu exista dreapta libera: textul ocupa frontispiciul de
+  sus pana jos, iar valul ar trece pe sub motto. Motto-ul e visiniu, iar valul
+  e facut tot din visiniu si din aproape-negru; visiniu peste visiniu inseamna
+  un contrast in jurul lui 1, fata de 9,69 cat are pe crem. Nicio doza de voal
+  nu repara asta fara sa stinga imaginea complet.
+
+  Varianta de dinainte incerca un compromis si nu iesea nimic din el: masca
+  stingea imaginea in jos exact acolo unde voalul se subtia, asa ca cele doua
+  se anulau si ramanea o pata cenusie fara forma.
+
+  Fara imagine, capatul de jos al frontispiciului si-a pierdut stingerea care
+  tinea loc de despartitor, deci filetul se intoarce.
+*/
+@media (max-width: 900px) {
+  .frontispiciu--fond::before,
+  .frontispiciu--fond::after { content: none; }
+
+  .frontispiciu--fond { border-bottom: 1px solid var(--linie); }
+}
+
+/* ---------- Legaturi de actiune ---------- */
+
+.actiuni {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-32);
+  margin-top: var(--sp-48);
+  align-items: center;
+}
+
+.legatura {
+  display: inline-block;
+  font-size: var(--t-05);
+  letter-spacing: 0.02em;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 2px;
+}
+
+.legatura:hover { color: var(--cerneala); border-bottom-color: var(--cerneala); }
+
+.legatura-stinsa {
+  display: inline-block;
+  font-size: var(--t-05);
+  color: var(--cerneala-stinsa);
+  text-decoration: none;
+  border-bottom: 1px solid var(--linie);
+  padding-bottom: 2px;
+}
+
+.legatura-stinsa:hover { color: var(--cerneala); border-bottom-color: var(--cerneala); }
+
+/* ---------- Liste ---------- */
+
+.lista-filet { border-top: 1px solid var(--linie); }
+
+.lista-filet > li {
+  border-bottom: 1px solid var(--linie);
+  padding-block: var(--sp-24);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+  gap: var(--sp-32);
+  align-items: baseline;
+}
+
+.lista-filet h3 { font-size: var(--t-2); }
+.lista-filet p { color: var(--cerneala-stinsa); font-size: var(--t-05); }
+
+@media (max-width: 700px) {
+  .lista-filet > li { grid-template-columns: minmax(0, 1fr); gap: var(--sp-8); }
+}
+
+.lista-puncte { display: flex; flex-direction: column; gap: var(--sp-12); }
+
+.lista-puncte > li {
+  position: relative;
+  padding-left: var(--sp-24);
+  max-width: var(--masura);
+}
+
+.lista-puncte > li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--eticheta);
+}
+
+/* ---------- Etape numerotate ---------- */
+
+.etape { display: flex; flex-direction: column; }
+
+.etapa {
+  display: grid;
+  grid-template-columns: 3.5rem minmax(0, 1fr);
+  gap: var(--sp-32);
+  padding-block: var(--sp-40);
+  border-top: 1px solid var(--linie);
+}
+
+.etapa:last-child { border-bottom: 1px solid var(--linie); }
+
+.etapa-cifra {
+  font-family: var(--serif);
+  font-size: var(--t-4);
+  color: var(--accent);
+  line-height: 1.1;
+}
+
+.etapa h3 { font-size: var(--t-3); margin-bottom: var(--sp-12); }
+.etapa p { color: var(--cerneala-stinsa); max-width: var(--masura); }
+.etapa .onorariu {
+  margin-top: var(--sp-16);
+  font-family: var(--serif);
+  font-size: var(--t-2);
+  color: var(--accent);
+}
+
+@media (max-width: 700px) {
+  .etapa { grid-template-columns: minmax(0, 1fr); gap: var(--sp-12); }
+}
+
+/* ---------- Fise (testele auditului) ---------- */
+
+.fise { display: flex; flex-direction: column; }
+
+.fisa {
+  padding-block: var(--sp-48);
+  border-top: 1px solid var(--linie);
+}
+
+.fisa:last-child { border-bottom: 1px solid var(--linie); }
+
+.fisa-titlu {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-16);
+  margin-bottom: var(--sp-24);
+}
+
+.fisa-titlu .numar {
+  font-family: var(--serif);
+  font-size: var(--t-3);
+  color: var(--accent);
+}
+
+.fisa-titlu h3 { font-size: var(--t-4); font-family: var(--serif); font-weight: 400; }
+
+.fisa-grila {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--sp-40);
+  margin-top: var(--sp-32);
+}
+
+@media (max-width: 700px) {
+  .fisa-grila { grid-template-columns: minmax(0, 1fr); gap: var(--sp-24); }
+}
+
+.fisa-grila h4 {
+  font-size: var(--t-mic);
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--eticheta);
+  margin-bottom: var(--sp-12);
+}
+
+/* ---------- Tabel ---------- */
+
+.tabel { margin-top: var(--sp-32); font-size: var(--t-05); }
+
+.tabel caption {
+  text-align: left;
+  font-size: var(--t-mic);
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--eticheta);
+  padding-bottom: var(--sp-16);
+}
+
+.tabel th, .tabel td {
+  text-align: left;
+  padding: var(--sp-16) var(--sp-16) var(--sp-16) 0;
+  border-bottom: 1px solid var(--linie);
+  vertical-align: top;
+}
+
+.tabel thead th {
+  font-size: var(--t-mic);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--eticheta);
+  font-weight: 600;
+  border-bottom-color: var(--accent);
+}
+
+.tabel td:last-child, .tabel th:last-child {
+  text-align: right;
+  padding-right: 0;
+  white-space: nowrap;
+  font-family: var(--serif);
+  font-size: var(--t-2);
+  color: var(--accent);
+}
+
+.tabel thead th:last-child { font-family: var(--sans); font-size: var(--t-mic); }
+
+/*
+  Pe telefon tabelul se desface in fise: fiecare rand devine un bloc, cu
+  denumirea sus si onorariul dedesubt. Altfel coloana onorariului, care nu se
+  rupe pe doua randuri, lateste pagina peste latimea ecranului si browserul
+  micsoreaza tot ca sa o incapa.
+*/
+@media (max-width: 700px) {
+  .tabel,
+  .tabel caption,
+  .tabel tbody,
+  .tabel tr,
+  .tabel td {
+    display: block;
+    width: auto;
+  }
+
+  /* Fara coloane nu mai au ce sa numeasca. */
+  .tabel thead { display: none; }
+
+  .tabel tr {
+    padding-block: var(--sp-16);
+    border-bottom: 1px solid var(--linie);
+  }
+
+  .tabel td { border: 0; padding: 0; }
+
+  .tabel td:last-child {
+    text-align: left;
+    white-space: normal;
+    margin-top: var(--sp-8);
+  }
+}
+
+/* ---------- Scara de digitalizare ---------- */
+
+.scara { margin-top: var(--sp-40); }
+
+.scara-bara {
+  display: grid;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+  gap: 3px;
+  margin-bottom: var(--sp-16);
+}
+
+/*
+  Bara este o riglă, nu un indicator: cele zece trepte se vad toate, cu
+  intensitate crescatoare de la 1 la 10. Opacitatea o pune componenta.
+  Pe fundal inchis nu se foloseste visiniul, care pe tus da 1,67.
+*/
+.scara-bara span {
+  height: 10px;
+  background: var(--accent);
+}
+
+.scara-capete {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--t-mic);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cerneala-stinsa);
+}
+
+.scara-trepte { margin-top: var(--sp-32); }
+
+.scara-trepte > li {
+  display: grid;
+  grid-template-columns: 5rem minmax(0, 1fr);
+  gap: var(--sp-24);
+  padding-block: var(--sp-16);
+  border-top: 1px solid var(--linie);
+}
+
+.scara-trepte > li:last-child { border-bottom: 1px solid var(--linie); }
+
+.scara-trepte .treapta {
+  font-family: var(--serif);
+  font-size: var(--t-2);
+  color: var(--accent);
+}
+
+@media (max-width: 700px) {
+  .scara-trepte > li { grid-template-columns: minmax(0, 1fr); gap: var(--sp-4); }
+}
+
+/* ---------- Articole ---------- */
+
+.lista-articole { border-top: 1px solid var(--linie); }
+
+.lista-articole > li { border-bottom: 1px solid var(--linie); }
+
+.lista-articole a {
+  display: grid;
+  grid-template-columns: 9rem minmax(0, 1fr);
+  gap: var(--sp-32);
+  padding-block: var(--sp-32);
+  text-decoration: none;
+}
+
+.lista-articole .data {
+  font-size: var(--t-mic);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cerneala-stinsa);
+  padding-top: 0.35em;
+}
+
+.lista-articole h3 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: var(--t-4);
+  margin-bottom: var(--sp-8);
+}
+
+.lista-articole a:hover h3 { color: var(--accent); }
+.lista-articole p { color: var(--cerneala-stinsa); font-size: var(--t-05); max-width: var(--masura); }
+
+@media (max-width: 700px) {
+  .lista-articole a { grid-template-columns: minmax(0, 1fr); gap: var(--sp-8); }
+}
+
+/* Corpul unui articol. */
+.articol { max-width: var(--coloana); }
+.articol-antet { padding-bottom: var(--sp-40); border-bottom: 1px solid var(--linie); }
+.articol-corp { padding-top: var(--sp-48); }
+.articol-corp > * + * { margin-top: var(--sp-24); }
+.articol-corp p, .articol-corp ul { max-width: var(--masura); }
+.articol-corp h2 {
+  font-size: var(--t-4);
+  margin-top: var(--sp-64);
+  padding-top: var(--sp-8);
+}
+.articol-corp ul { display: flex; flex-direction: column; gap: var(--sp-12); }
+.articol-corp li { position: relative; padding-left: var(--sp-24); }
+.articol-corp li::before { content: "—"; position: absolute; left: 0; color: var(--accent); }
+.articol-corp blockquote {
+  border-left: 2px solid var(--accent);
+  padding-left: var(--sp-24);
+  font-family: var(--serif);
+  font-size: var(--t-3);
+  line-height: var(--lh-mediu);
+  max-width: var(--masura);
+}
+
+/* ---------- Formular ---------- */
+
+.formular { max-width: 620px; margin-top: var(--sp-40); }
+.camp { margin-bottom: var(--sp-24); }
+
+.camp label {
+  display: block;
+  font-size: var(--t-mic);
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--cerneala-stinsa);
+  margin-bottom: var(--sp-8);
+}
+
+.camp input, .camp textarea, .camp select {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--linie-tare);
+  padding: var(--sp-8) 0;
+  font-size: var(--t-1);
+  border-radius: 0;
+  appearance: none;
+}
+
+/*
+  Sageata listei de alegere, desenata ca SVG in linie. Fara ea, campul arata
+  ca oricare altul si nu se vede ca se poate deschide. Culoarea este tusul.
+*/
+.camp select {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5' fill='none' stroke='%23141416' stroke-width='1.3'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 2px center;
+  background-size: 12px 8px;
+  padding-right: var(--sp-24);
+  cursor: pointer;
+}
+.camp textarea { min-height: 8rem; resize: vertical; }
+
+/* Cifra de afaceri si numarul de angajati: doua liste scurte, pe acelasi rand
+   cat incap, ca sa nu lungeasca formularul cu inca doua trepte. */
+.camp-pereche {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--sp-32);
+}
+
+@media (max-width: 560px) {
+  .camp-pereche { grid-template-columns: minmax(0, 1fr); gap: 0; }
+}
+.camp input:focus, .camp textarea:focus, .camp select:focus {
+  outline: 0;
+  border-bottom-color: var(--accent);
+}
+
+.camp .eroare { color: var(--accent); font-size: var(--t-05); margin-top: var(--sp-8); text-transform: none; letter-spacing: 0; }
+
+.capcana { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+.buton {
+  background: var(--visiniu);
+  color: var(--crem);
+  border: 1px solid var(--visiniu);
+  padding: var(--sp-16) var(--sp-40);
+  font-size: var(--t-05);
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: background var(--tranzitie), color var(--tranzitie);
+}
+
+.buton:hover { background: var(--tus); border-color: var(--tus); }
+.buton[disabled] { opacity: 0.5; cursor: default; }
+
+.raspuns-formular {
+  margin-top: var(--sp-24);
+  padding: var(--sp-24);
+  border-left: 2px solid var(--accent);
+  background: var(--panza-loc);
+  max-width: var(--masura);
+}
+
+/* ---------- Fise de date (contact, identificare) ---------- */
+
+.date-lista { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sp-40); }
+
+.date-lista div { border-top: 1px solid var(--linie); padding-top: var(--sp-16); }
+
+.date-lista dt {
+  font-size: var(--t-mic);
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--eticheta);
+  margin-bottom: var(--sp-8);
+}
+
+.date-lista dd { margin: 0; }
+
+@media (max-width: 700px) {
+  .date-lista { grid-template-columns: minmax(0, 1fr); gap: var(--sp-24); }
+}
+
+/* ---------- Text juridic ---------- */
+
+.juridic { max-width: var(--coloana); }
+.juridic > * + * { margin-top: var(--sp-24); }
+.juridic h2 { font-size: var(--t-4); margin-top: var(--sp-48); }
+.juridic p, .juridic li { max-width: var(--masura); font-size: var(--t-05); }
+.juridic ul { display: flex; flex-direction: column; gap: var(--sp-8); }
+.juridic li { position: relative; padding-left: var(--sp-24); }
+.juridic li::before { content: "—"; position: absolute; left: 0; color: var(--accent); }
+
+.avertisment {
+  border-left: 2px solid var(--accent);
+  background: var(--panza-loc);
+  padding: var(--sp-24);
+  font-size: var(--t-05);
+  max-width: var(--masura);
+}
+
+/* ---------- Derularea pilonilor, cu panou fixat ---------- */
+
+.derulare {
+  display: grid;
+  /*
+    Trei coloane: etichetele fixate, descrierea care se deruleaza, schema
+    fixata. Prima si a treia stau pe loc; numai cea din mijloc trece.
+  */
+  grid-template-columns: minmax(0, 0.62fr) minmax(0, 1.24fr) minmax(0, 0.66fr);
+  gap: var(--sp-48);
+  align-items: start;
+  margin-top: var(--sp-48);
+}
+
+.derulare-pas {
+  padding-block: clamp(var(--sp-64), 12vh, var(--sp-160));
+  border-top: 1px solid var(--linie);
+  /* Un pas cu text putin ar trece prea repede prin mijlocul ferestrei si nu
+     s-ar vedea nici schema lui, nici randul din stanga. */
+  min-height: 52vh;
+}
+
+.derulare-pas:first-child { border-top: 0; padding-top: var(--sp-16); }
+.derulare-pas:last-child { padding-bottom: var(--sp-16); }
+.derulare-pas > p { max-width: var(--masura); }
+
+/*
+  Coloana din stanga: numeralele si titlurile, fixate si centrate pe verticala,
+  ca si schema din dreapta. Cel activ se aprinde; celelalte raman stinse, dar
+  lizibile, ca sa se vada intreaga succesiune.
+*/
+.derulare-nav {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.derulare-nav ol {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-32);
+  border-left: 1px solid var(--linie);
+}
+
+.derulare-nav li {
+  display: grid;
+  grid-template-columns: 2.4rem minmax(0, 1fr);
+  gap: var(--sp-8);
+  align-items: baseline;
+  padding-left: var(--sp-24);
+  margin-left: -1px;
+  border-left: 2px solid transparent;
+  opacity: 0.34;
+  transition: opacity 420ms linear, border-color 420ms linear;
+}
+
+.derulare-nav li[data-activ] {
+  opacity: 1;
+  border-left-color: var(--accent);
+}
+
+.derulare-nav .numar {
+  font-family: var(--serif);
+  font-size: var(--t-4);
+  line-height: 1;
+  color: var(--accent);
+}
+
+.derulare-nav .titlu {
+  font-family: var(--serif);
+  font-size: var(--t-2);
+  line-height: var(--lh-mediu);
+}
+
+/* Titlul din bloc ramane in cod pentru cititoarele de ecran si pentru ecranul
+   ingust, dar pe ecran lat il tine coloana din stanga. */
+.derulare-cap { margin-bottom: var(--sp-32); }
+
+.derulare-cap .numar-mare {
+  display: block;
+  font-family: var(--serif);
+  font-size: var(--t-6);
+  line-height: 1;
+  color: var(--accent);
+  opacity: 0.24;
+  transform: translateY(8px);
+  transition: opacity 420ms linear, transform 520ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.derulare-pas[data-activ] .derulare-cap .numar-mare {
+  opacity: 1;
+  transform: none;
+}
+
+.derulare-cap h3 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: var(--t-4);
+  margin-top: var(--sp-12);
+}
+
+/*
+  Panoul ramane pe ecran cat timp trec pasii pe langa el, si sta la mijlocul
+  ferestrei: inaltimea de un ecran plus centrarea pe verticala il aseaza exact
+  in dreptul pilonului care trece prin centru, adica al celui socotit activ.
+*/
+.derulare-panou {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.derulare-teanc {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border: 1px solid var(--linie);
+  background: var(--panza-loc);
+}
+
+.derulare-teanc .schema-cadru {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 260ms linear;
+}
+
+.derulare-teanc .schema-cadru.activ { opacity: 1; }
+
+.schema { display: block; width: 100%; height: 100%; }
+
+.derulare-indice {
+  margin-top: var(--sp-24);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-8);
+  font-size: var(--t-mic);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cerneala-stinsa);
+}
+
+.derulare-indice li {
+  display: grid;
+  grid-template-columns: 1.6rem minmax(0, 1fr);
+  gap: var(--sp-8);
+  transition: color var(--tranzitie);
+}
+
+.derulare-indice li[data-activ] { color: var(--accent); }
+.derulare-indice .numar { font-family: var(--serif); text-transform: none; }
+
+/* ---------- Desenele ---------- */
+
+.schema line,
+.schema polyline,
+.schema rect,
+.schema circle { vector-effect: non-scaling-stroke; }
+
+.schema-sina { stroke: var(--linie); }
+.schema-axa,
+.schema-culoar,
+.schema-diviziune { stroke: var(--linie-tare); }
+
+/* I. Maturitatea: barele se traseaza de la stanga la dreapta. */
+.schema-bara {
+  stroke: var(--cerneala);
+  stroke-width: 6;
+  stroke-dasharray: var(--lungime);
+  stroke-dashoffset: var(--lungime);
+  transition: stroke-dashoffset 520ms ease-out;
+  transition-delay: calc(var(--pas) * 70ms);
+}
+
+.activ .schema-bara { stroke-dashoffset: 0; }
+
+.schema-cursor { opacity: 0; transition: opacity 300ms linear 560ms; }
+.activ .schema-cursor { opacity: 1; }
+.schema-cursor line { stroke: var(--accent); stroke-width: 2; }
+.schema-cursor text { fill: var(--accent); font-family: var(--serif); font-size: 16px; }
+
+/* II. Inventarul: cutiile se aseaza din imprastiere in ordine. */
+.schema-cutie {
+  fill: none;
+  stroke: var(--cerneala);
+  stroke-width: 1;
+  opacity: 0.5;
+  transform: translate(var(--dx), var(--dy));
+  transition: transform 620ms cubic-bezier(0.2, 0.7, 0.2, 1), opacity 420ms linear;
+  transition-delay: calc(var(--pas) * 60ms);
+}
+
+.activ .schema-cutie { transform: translate(0, 0); opacity: 1; }
+.schema-cutie--marcata { stroke: var(--accent); stroke-width: 2; }
+
+/* III. Fluxurile: traseul se traseaza, timpul mort ramane punctat. */
+.schema-traseu {
+  fill: none;
+  stroke: var(--cerneala);
+  stroke-width: 2;
+  stroke-dasharray: 1200;
+  stroke-dashoffset: 1200;
+  transition: stroke-dashoffset 1100ms ease-out;
+}
+
+.activ .schema-traseu { stroke-dashoffset: 0; }
+
+.schema-mort {
+  stroke: var(--accent);
+  stroke-width: 3;
+  stroke-dasharray: 3 6;
+  opacity: 0;
+  transition: opacity 300ms linear 760ms;
+}
+
+.activ .schema-mort { opacity: 1; }
+
+.schema-predare {
+  fill: var(--fundal);
+  stroke: var(--cerneala);
+  stroke-width: 1.5;
+  opacity: 0;
+  transition: opacity 240ms linear;
+  transition-delay: calc(520ms + var(--pas) * 70ms);
+}
+
+.activ .schema-predare { opacity: 1; }
+
+/* IV. Scoringul: grila se completeaza, apoi apar scorurile. */
+.schema-celula {
+  fill: var(--cerneala);
+  opacity: 0;
+  transition: opacity 320ms linear;
+  transition-delay: calc(var(--pas) * 90ms);
+}
+
+.activ .schema-celula { opacity: 1; }
+.schema-celula[data-val="1"] { fill-opacity: 0.16; }
+.schema-celula[data-val="2"] { fill-opacity: 0.44; }
+.schema-celula[data-val="3"] { fill-opacity: 0.82; }
+
+.schema-scor {
+  stroke: var(--accent);
+  stroke-width: 6;
+  stroke-dasharray: var(--lungime);
+  stroke-dashoffset: var(--lungime);
+  transition: stroke-dashoffset 500ms ease-out;
+  transition-delay: calc(320ms + var(--pas) * 80ms);
+}
+
+.activ .schema-scor { stroke-dashoffset: 0; }
+
+/* Schema din bloc: numai pe ecran ingust, si desenata intreaga. */
+.derulare .fisa-grila {
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--sp-32);
+}
+
+/*
+  Titlul pasului il arata coloana fixata, pe ecran lat, si bara fixata de sus,
+  pe telefon. In bloc ramane, dar numai pentru cititoarele de ecran: altfel
+  sectiunile acestea n-ar mai avea niciun titlu in pagina.
+*/
+.derulare .derulare-cap {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/*
+  ---------- Aceeasi coregrafie pe telefon, pe verticala ----------
+
+  Pe ecran lat, doua coloane stau pe loc si numai cea din mijloc trece. Pe
+  telefon nu exista trei coloane, dar exista sus si jos: intai se fixeaza sus
+  bara cu numele pasului, apoi, chiar sub ea, desenul; descrierea trece pe sub
+  amandoua. Se desprind la capatul derularii, fiindca sunt fixate in cutia ei,
+  nu in pagina.
+
+  Fondul lor este fondul sectiunii, oricare ar fi el — la servicii se schimba
+  la derulare — pentru ca textul care trece pe dedesubt sa nu se vada prin ele.
+*/
+@media (max-width: 900px) {
+  .derulare {
+    display: flex;
+    flex-direction: column;
+    /* Pe coloana, "align-items: start" de pe ecran lat ar strange fiecare
+       bucata la latimea cuprinsului ei. */
+    align-items: stretch;
+    gap: 0;
+    /* Inaltimea barei, intr-un singur loc: o folosesc si bara, si inaltimea
+       la care se opreste desenul. */
+    --bara: 3.25rem;
+  }
+
+  .derulare-nav {
+    order: 1;
+    z-index: 3;
+    top: 0;
+    height: var(--bara);
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    background: var(--fundal);
+    overflow: hidden;
+  }
+
+  .derulare-nav ol { border-left: 0; gap: 0; }
+
+  /* In bara incape un singur pas: cel prin care trece derularea. */
+  .derulare-nav li { display: none; }
+
+  .derulare-nav li[data-activ] {
+    display: grid;
+    opacity: 1;
+    padding-left: 0;
+    margin-left: 0;
+    border-left: 0;
+  }
+
+  .derulare-nav .numar { font-size: var(--t-3); }
+
+  .derulare-nav .titlu {
+    font-size: var(--t-2);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .derulare-panou {
+    order: 2;
+    z-index: 2;
+    top: var(--bara);
+    height: auto;
+    display: block;
+    background: var(--fundal);
+    padding-bottom: var(--sp-16);
+    border-bottom: 1px solid var(--linie);
+  }
+
+  /* Mai lat decat inalt, ca sa ramana ecran pentru descriere. */
+  .derulare-teanc { aspect-ratio: 16 / 10; }
+
+  .derulare-pasi {
+    order: 3;
+    position: relative;
+    z-index: 1;
+  }
+
+  .derulare-pas { padding-block: var(--sp-48); }
+}
+
+/*
+  Miscare redusa: schemele raman, dar apar dintr-o data. Trecerea de la un
+  pilon la altul se pastreaza, pentru ca ea nu e ornament, ci continut.
+*/
+@media (prefers-reduced-motion: reduce) {
+  .schema *,
+  .derulare-teanc .schema-cadru,
+  .derulare-cap .numar-mare {
+    transition-duration: 1ms !important;
+    transition-delay: 0ms !important;
+  }
+  .derulare-cap .numar-mare { transform: none; }
+}
+
+/* ---------- Desenele etapelor ---------- */
+
+.schema-eticheta {
+  fill: var(--cerneala-stinsa);
+  font-family: var(--sans);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+}
+
+/* I. Ora de discutie si ordinul de marime care iese din ea. */
+.schema-ora {
+  fill: var(--cerneala);
+  opacity: 0;
+  transition: opacity 320ms linear;
+}
+
+.activ .schema-ora { opacity: 1; }
+
+.schema-sageata line,
+.schema-sageata polyline {
+  fill: none;
+  stroke: var(--cerneala);
+  stroke-width: 1.5;
+}
+
+.schema-sageata {
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: opacity 300ms linear 260ms, transform 420ms ease-out 260ms;
+}
+
+.activ .schema-sageata { opacity: 1; transform: none; }
+
+.schema-marime {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-dasharray: 6 6;
+  opacity: 0;
+  transition: opacity 360ms linear 480ms;
+}
+
+.activ .schema-marime { opacity: 1; }
+
+.schema-marja {
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  opacity: 0;
+  transition: opacity 360ms linear 640ms;
+}
+
+.activ .schema-marja { opacity: 1; }
+
+/* II. Coloanele masuratorii si linia totalului. */
+.schema-coloana {
+  fill: var(--cerneala);
+  fill-opacity: 0.78;
+  transform-box: fill-box;
+  transform-origin: bottom;
+  transform: scaleY(0);
+  transition: transform 480ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: calc(var(--pas) * 60ms);
+}
+
+.activ .schema-coloana { transform: scaleY(1); }
+
+.schema-total {
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-dasharray: 332;
+  stroke-dashoffset: 332;
+  transition: stroke-dashoffset 620ms ease-out 520ms;
+}
+
+.activ .schema-total { stroke-dashoffset: 0; }
+
+/* III. Lista care se executa de sus in jos. */
+.schema-fir {
+  stroke: var(--linie-tare);
+  stroke-width: 1;
+  stroke-dasharray: 208;
+  stroke-dashoffset: 208;
+  transition: stroke-dashoffset 900ms linear;
+}
+
+.activ .schema-fir { stroke-dashoffset: 0; }
+
+.schema-rand-gol { fill: none; stroke: var(--linie-tare); stroke-width: 1; }
+
+.schema-rand-plin {
+  fill: var(--cerneala);
+  fill-opacity: 0.82;
+  transform-box: fill-box;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 420ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: calc(var(--pas) * 120ms);
+}
+
+.activ .schema-rand-plin { transform: scaleX(1); }
+
+.schema-castig {
+  stroke: var(--accent);
+  stroke-width: 6;
+  stroke-dasharray: var(--lungime);
+  stroke-dashoffset: var(--lungime);
+  transition: stroke-dashoffset 380ms ease-out;
+  transition-delay: calc(200ms + var(--pas) * 120ms);
+}
+
+.activ .schema-castig { stroke-dashoffset: 0; }
+
+.schema-capat {
+  fill: var(--accent);
+  opacity: 0;
+  transition: opacity 240ms linear;
+}
+
+.activ .schema-capat { opacity: 1; }
+
+/* Onorariul, sub descrierea etapei. */
+.derulare-pas .onorariu {
+  margin-top: var(--sp-24);
+  font-family: var(--serif);
+  font-size: var(--t-2);
+  color: var(--accent);
+}
+
+/* ---------- Indemnul mare de la capatul unei sectiuni ---------- */
+
+.actiuni--mare { margin-top: var(--sp-80); }
+
+.legatura-mare {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--sp-16);
+  font-family: var(--serif);
+  font-size: var(--t-4);
+  line-height: var(--lh-mediu);
+  color: var(--accent);
+  text-decoration: none;
+  padding-bottom: var(--sp-12);
+  border-bottom: 1px solid var(--accent);
+}
+
+.legatura-mare .sageata {
+  font-family: var(--sans);
+  font-size: 0.7em;
+  transition: transform 180ms ease-out;
+}
+
+.legatura-mare:hover { color: var(--cerneala); border-bottom-color: var(--cerneala); }
+.legatura-mare:hover .sageata { transform: translateX(5px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .legatura-mare .sageata { transition-duration: 1ms; }
+  .legatura-mare:hover .sageata { transform: none; }
+}
+
+/*
+  ---------- Atingerea pe telefon ----------
+
+  Legaturile de text sunt tinte de vreo 26 de puncte, mai mici decat degetul.
+  Pe ecran ingust se largesc la 44: unde aerul in plus nu se vede — datele de
+  contact, subsolul — prin captuseala; la legaturile cu filet dedesubt, prin
+  intinderea zonei de atingere peste text, ca filetul sa nu se depaseasca de
+  cuvant.
+*/
+@media (max-width: 900px) {
+  .date-lista dd a,
+  .subsol a {
+    display: inline-block;
+    padding-block: var(--sp-8);
+  }
+
+  .subsol ul { gap: var(--sp-12); }
+
+  .legatura,
+  .legatura-stinsa,
+  .legatura-mare {
+    position: relative;
+  }
+
+  .legatura::after,
+  .legatura-stinsa::after,
+  .legatura-mare::after {
+    content: "";
+    position: absolute;
+    inset: -10px 0;
+  }
+}
+
+/* ---------- Desenele functiilor ---------- */
+
+.schema-act {
+  fill: none;
+  stroke: var(--cerneala);
+  stroke-width: 1;
+  opacity: 0;
+  transform: translateX(-14px);
+  transition: opacity 320ms linear, transform 420ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: calc(var(--pas) * 80ms);
+}
+
+.schema-rand-act {
+  stroke: var(--cerneala);
+  stroke-opacity: 0.4;
+  stroke-width: 1;
+  opacity: 0;
+  transition: opacity 320ms linear;
+  transition-delay: calc(var(--pas) * 80ms);
+}
+
+.activ .schema-act { opacity: 1; transform: none; }
+.activ .schema-rand-act { opacity: 1; }
+
+.schema-evidenta {
+  fill: none;
+  stroke: var(--linie-tare);
+  stroke-width: 1;
+}
+
+.schema-potrivire {
+  stroke: var(--accent);
+  stroke-width: 4;
+  stroke-dasharray: 130;
+  stroke-dashoffset: 130;
+  transition: stroke-dashoffset 420ms ease-out;
+  transition-delay: calc(420ms + var(--pas) * 90ms);
+}
+
+.activ .schema-potrivire { stroke-dashoffset: 0; }
+
+.schema-treapta {
+  fill: var(--cerneala);
+  fill-opacity: 0.72;
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scaleX(0);
+  transition: transform 440ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: calc(var(--pas) * 90ms);
+}
+
+.activ .schema-treapta { transform: scaleX(1); }
+.schema-treapta--castig { fill: var(--accent); fill-opacity: 1; }
+
+.schema-scurgere {
+  stroke: var(--linie-tare);
+  stroke-width: 1;
+  stroke-dasharray: 4 5;
+}
+
+.schema-coada {
+  fill: none;
+  stroke: var(--cerneala);
+  stroke-width: 1.5;
+  opacity: 0;
+  transition: opacity 300ms linear;
+}
+
+.activ .schema-coada { opacity: 1; }
+
+.schema-ramura {
+  fill: none;
+  stroke: var(--cerneala);
+  stroke-width: 1.5;
+  stroke-dasharray: 130;
+  stroke-dashoffset: 130;
+  transition: stroke-dashoffset 460ms ease-out;
+  transition-delay: calc(220ms + var(--pas) * 100ms);
+}
+
+.activ .schema-ramura { stroke-dashoffset: 0; }
+
+.schema-lucrare {
+  fill: var(--accent);
+  fill-opacity: 0.86;
+  opacity: 0;
+  transition: opacity 260ms linear;
+  transition-delay: calc(620ms + var(--pas) * 60ms);
+}
+
+.activ .schema-lucrare { opacity: 1; }
+
+/* ---------- Coloana din stanga, la servicii: numele scris mare ---------- */
+
+/*
+  Numele serviciului sta la mijlocul ferestrei, in dreptul schemei din dreapta.
+  Nu se declara aici niciun display: coloana mosteneste flex-ul si centrarea
+  pe verticala de la .derulare-nav, iar o valoare proprie le-ar anula pe
+  amandoua — asa ajunsese numele lipit de marginea de sus.
+*/
+.derulare-nav--mare { align-items: flex-start; }
+
+/* Cuprinsul se desprinde de introducere si de schema din bloc. */
+.derulare--servicii .derulare-pas > .introducere { margin-bottom: var(--sp-40); }
+
+.serviciu-nume {
+  font-family: var(--serif);
+  font-size: var(--t-6);
+  line-height: var(--lh-mare);
+  color: var(--accent);
+}
+
+.serviciu-departament {
+  margin-top: var(--sp-16);
+  padding-top: var(--sp-16);
+  border-top: 1px solid var(--linie);
+  font-family: var(--serif);
+  font-size: var(--t-3);
+  color: var(--cerneala);
+}
+
+/* In blocul lui, pasul isi poarta titlul: departamentul, cu serviciul dedesubt.
+   Pe ecran lat il tine coloana din stanga, ca la ceilalti. */
+.derulare-cap-serviciu {
+  margin-top: var(--sp-4);
+  font-size: var(--t-mic);
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--eticheta);
+}
+
+/*
+  Bara serviciilor, pe telefon: numele si departamentul stau pe acelasi rand,
+  despartite de un punct, ca inaltimea barei sa fie aceeasi si acolo unde
+  departament nu exista — la CRM si la aplicatia mobila.
+*/
+@media (max-width: 900px) {
+  .derulare-nav--mare {
+    align-items: center;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .serviciu-nume {
+    display: inline;
+    font-size: var(--t-3);
+  }
+
+  .serviciu-departament {
+    display: inline;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: var(--t-2);
+    color: var(--cerneala-stinsa);
+  }
+
+  /* Spatiile de nedespartit, ca punctul sa nu se lipeasca de nume. */
+  .serviciu-departament::before { content: "\00a0\00b7\00a0"; }
+}
+
+/* ---------- Desenele serviciilor ---------- */
+
+/* Resurse umane */
+.schema-candidat {
+  fill: none;
+  stroke: var(--cerneala);
+  stroke-width: 1;
+  opacity: 0;
+  transform: translateX(-12px);
+  transition: opacity 300ms linear, transform 400ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: calc(var(--pas) * 60ms);
+}
+
+.activ .schema-candidat { opacity: 1; transform: none; }
+.schema-candidat--retinut { stroke: var(--accent); stroke-width: 2; }
+
+.schema-dosar {
+  fill: none;
+  stroke: var(--linie-tare);
+  stroke-width: 1;
+}
+
+.schema-fisa {
+  stroke: var(--accent);
+  stroke-width: 4;
+  stroke-dasharray: 98;
+  stroke-dashoffset: 98;
+  transition: stroke-dashoffset 420ms ease-out;
+  transition-delay: calc(560ms + var(--pas) * 120ms);
+}
+
+.activ .schema-fisa { stroke-dashoffset: 0; }
+
+/* Juridic */
+.schema-termen {
+  stroke: var(--cerneala);
+  stroke-width: 1.5;
+  opacity: 0;
+  transition: opacity 280ms linear;
+  transition-delay: calc(var(--pas) * 80ms);
+}
+
+.schema-bulina {
+  fill: var(--cerneala);
+  opacity: 0;
+  transition: opacity 280ms linear;
+  transition-delay: calc(var(--pas) * 80ms);
+}
+
+.activ .schema-termen,
+.activ .schema-bulina { opacity: 1; }
+
+.schema-termen--apropiat { stroke: var(--accent); stroke-width: 3; }
+.schema-bulina--apropiat { fill: var(--accent); }
+
+.schema-preaviz {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  stroke-dasharray: 5 5;
+  opacity: 0;
+  transition: opacity 320ms linear 620ms;
+}
+
+.schema-preaviz-linie {
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  opacity: 0;
+  transition: opacity 320ms linear 620ms;
+}
+
+.activ .schema-preaviz,
+.activ .schema-preaviz-linie { opacity: 1; }
+
+/* Achizitii */
+.schema-oferta {
+  fill: var(--cerneala);
+  fill-opacity: 0.4;
+  transform-box: fill-box;
+  transform-origin: bottom;
+  transform: scaleY(0);
+  transition: transform 420ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: calc(var(--pas) * 55ms);
+}
+
+.activ .schema-oferta { transform: scaleY(1); }
+.schema-oferta--aleasa { fill: var(--accent); fill-opacity: 0.9; }
+
+.schema-alegere {
+  stroke: var(--accent);
+  stroke-width: 3;
+  stroke-dasharray: 92;
+  stroke-dashoffset: 92;
+  transition: stroke-dashoffset 400ms ease-out 640ms;
+}
+
+.activ .schema-alegere { stroke-dashoffset: 0; }
+
+/* CRM */
+.schema-etapa-cap {
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-dasharray: 52;
+  stroke-dashoffset: 52;
+  transition: stroke-dashoffset 320ms ease-out;
+  transition-delay: calc(var(--pas) * 70ms);
+}
+
+.activ .schema-etapa-cap { stroke-dashoffset: 0; }
+
+.schema-cartela {
+  fill: none;
+  stroke: var(--cerneala);
+  stroke-width: 1;
+  opacity: 0;
+  transition: opacity 300ms linear;
+  transition-delay: calc(140ms + var(--pas) * 55ms);
+}
+
+.activ .schema-cartela { opacity: 1; }
+.schema-cartela[data-goala] { opacity: 0 !important; }
+.schema-cartela--activa { fill: var(--accent); stroke: var(--accent); }
+
+.schema-parcurs {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-dasharray: 4 6;
+  stroke-dashoffset: 320;
+  opacity: 0;
+  transition: opacity 320ms linear 620ms;
+}
+
+.activ .schema-parcurs { opacity: 1; }
+
+/* Aplicatie mobila */
+.schema-telefon {
+  fill: none;
+  stroke: var(--cerneala);
+  stroke-width: 1.5;
+  opacity: 0;
+  transition: opacity 320ms linear;
+}
+
+.schema-difuzor {
+  stroke: var(--cerneala);
+  stroke-width: 2;
+  opacity: 0;
+  transition: opacity 320ms linear;
+}
+
+.activ .schema-telefon,
+.activ .schema-difuzor { opacity: 1; }
+
+.schema-rand-mobil {
+  fill: var(--cerneala);
+  fill-opacity: 0.62;
+  transform-box: fill-box;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 380ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: calc(200ms + var(--pas) * 90ms);
+}
+
+.activ .schema-rand-mobil { transform: scaleX(1); }
+
+.schema-semnatura {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-dasharray: 190;
+  stroke-dashoffset: 190;
+  transition: stroke-dashoffset 700ms ease-out 620ms;
+}
+
+.activ .schema-semnatura { stroke-dashoffset: 0; }
+
+.schema-sincron {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-dasharray: 220;
+  stroke-dashoffset: 220;
+  transition: stroke-dashoffset 800ms ease-out 320ms;
+}
+
+.schema-sincron-varf {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+  opacity: 0;
+  transition: opacity 260ms linear 1000ms;
+}
+
+.activ .schema-sincron { stroke-dashoffset: 0; }
+.activ .schema-sincron-varf { opacity: 1; }

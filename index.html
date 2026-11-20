@@ -10,252 +10,295 @@
 <meta property="og:description" content="NoBill preia documentele financiare ale unei societăți, le aduce la un model de date unic și calculează indicatorii cu trasabilitate până la documentul-sursă. Patru module: ClearFinance, DiligenceIQ, TheTreasurer, Fiscal Mind.">
 <meta property="og:image" content="assets/nobill-logo.png">
 <meta property="og:type" content="website">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/baza.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/blocuri.css">
 </head>
 <body>
-<header class="nav">
-  <div class="bar">
-    <a href="index.html"><img src="assets/nobill-logo.png" alt="NoBill"></a>
-    <div class="links">
-      <a href="index.html#platforma">Platforma</a>
-      <a href="index.html#modulele">Modulele</a>
-      <a href="index.html#limbi">Multilingvism</a>
-      <a href="index.html#contact" class="pill">Contact</a>
+<div class="pagina">
+<a class="sari-la-continut" href="#continut">Sari la conținut</a>
+
+<header class="antet">
+  <div class="container">
+    <div class="antet-rand">
+      <a class="marca" href="index.html"><img src="assets/nobill-logo-ink.png" alt="NoBill — Finance Innovation" width="52" height="26"></a>
+      <nav class="navigatie" aria-label="Navigație principală">
+        <ul>
+          <li><a href="index.html" aria-current="page">Platforma</a></li>
+          <li><a href="index.html#nucleul">Nucleul</a></li>
+          <li><a href="index.html#modulele">Modulele</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
     </div>
   </div>
 </header>
-<!-- HERO -->
-<div class="block dark hero">
-  <div class="eyebrow">Platformă de date financiare</div>
-  <h1>Documentele firmei, citite o dată. Folosite de patru ori.</h1>
-  <p class="sub">
-    NoBill preia facturile, extrasele de cont, balanțele și situațiile financiare în forma în care
-    sosesc, le aduce la <b>un model de date unic</b> și recalculează indicatorii din mărimi primare.
-    Fiecare cifră afișată duce înapoi la documentul din care a fost citită — iar ce nu poate fi legat
-    de o sursă nu se afișează deloc.
-  </p>
-  <div class="btns">
-    <a class="btn btn-p" href="#modulele">Cele patru module</a>
-    <a class="btn btn-g" href="#platforma">Cum funcționează</a>
-  </div>
-  <div class="pills">
-    <span>RO e-Factura · UBL 2.1</span>
-    <span>SAF-T · D406</span>
-    <span>OMFP 1802/2014</span>
-    <span>Reconciliere de extras</span>
-    <span>Pistă de audit completă</span>
-    <span>Multilingv</span>
-  </div>
-</div>
 
-<!-- PROBLEMA -->
-<div class="block" id="platforma">
-  <div class="eyebrow">Ce rezolvăm</div>
-  <h2>Trei lucrări care se fac și azi document cu document</h2>
-  <p class="lead">
-    Obligațiile declarative cer aceleași date, curate, la termene tot mai scurte. Partea de preluare și
-    de punere în formă a documentelor rămâne manuală — și consumă exact timpul pe care l-ar cere analiza.
-  </p>
-  <div class="rows">
-    <div class="row"><div class="ic">01</div><div>
-      <h3>Dosarul de due diligence se reface de la zero</h3>
-      <p>La vânzarea unei societăți sau a unui activ, pachetul cerut de cumpărător și de finanțator se
-      construiește document cu document: retratarea situațiilor pe mai multe exerciții, ajustările de
-      normalizare a rezultatului, reconcilierea între balanță, bilanț și contracte.</p>
-      <p>Orice schimbare de perimetru sau de perioadă de referință înseamnă reluarea întregii lucrări.</p>
-    </div></div>
-    <div class="row"><div class="ic">02</div><div>
-      <h3>Fluxul de numerar se vede prea târziu</h3>
-      <p>Previziunea de trezorerie este, în cele mai multe societăți mici și mijlocii, o foaie de calcul
-      actualizată manual — deci rar și inegal. Deficitul de lichiditate apare în evidență după ce s-a
-      produs, nu cu trei luni înainte, când încă se poate corecta.</p>
-    </div></div>
-    <div class="row"><div class="ic">03</div><div>
-      <h3>Aceleași date, cerute de tot mai multe ori</h3>
-      <p>RO e-Factura, SAF-T, decontul precompletat de TVA și RO e-Transport se alimentează din aceeași
-      bază. Dacă baza se construiește prin introducere manuală, eroarea se propagă în toate raportările
-      deodată — iar volumul crește mai repede decât numărul profesioniștilor care îl pot duce.</p>
-    </div></div>
+<main class="continut" id="continut">
+<header class="frontispiciu">
+  <div class="container">
+    <p class="supratitlu">Platformă de date financiare</p>
+    <h1 class="titlu-pagina">Documentele firmei, citite o dată. Folosite de patru ori.</h1>
+    <p class="introducere">NoBill preia facturile, extrasele de cont, balanțele și situațiile financiare în forma
+    în care sosesc, le aduce la un model de date unic și recalculează indicatorii din mărimi primare.</p>
+    <p class="actiuni">
+      <a class="legatura" href="#modulele">Cele patru module</a>
+      <a class="legatura-stinsa" href="#nucleul">Cum funcționează</a>
+    </p>
+    <p class="motto">Fiecare cifră duce înapoi la documentul din care a fost citită; ce nu poate fi legat de o sursă nu se afișează.</p>
   </div>
-</div>
+</header>
 
-<!-- NUCLEU -->
-<div class="block dark">
-  <div class="eyebrow">Nucleul comun</div>
-  <h2>Opt componente, un singur strat de date</h2>
-  <p class="lead">
-    Cele patru module nu sunt aplicații separate puse sub aceeași siglă. Toate interoghează același
-    depozit de mărimi canonice și același motor de calcul. De aici vine consistența: un indicator are
-    aceeași valoare în oricare dintre module, fiindcă provine din același loc și este recalculat după
-    aceeași regulă, în versiunea ei consemnată.
-  </p>
-  <div class="core">
-    <div class="c"><div class="n">1</div><h4>Ingestie și segmentare</h4><p>Despachetare și segmentare pe pagini și blocuri; recunoaștere optică numai dacă nu există strat de text.</p></div>
-    <div class="c"><div class="n">2</div><h4>Extracție de câmpuri</h4><p>Model rulat local, pe serverul societății: documentele financiare ale clienților nu părăsesc infrastructura.</p></div>
-    <div class="c"><div class="n">3</div><h4>Ancora de proveniență</h4><p>Fiecărei valori i se atașează documentul, pagina și zona din care a fost citită.</p></div>
-    <div class="c"><div class="n">4</div><h4>Normalizare canonică</h4><p>Concept, valoare, unitate și factor de scară, monedă, perioadă, cadru de raportare — plus maparea multilingvă.</p></div>
-    <div class="c"><div class="n">5</div><h4>Depozit de mărimi canonice</h4><p>O singură bază de mărimi primare, din care se servesc toate modulele.</p></div>
-    <div class="c"><div class="n">6</div><h4>Motor de calcul determinist</h4><p>Mărimile derivate se recalculează din cele primare, pe un graf aciclic; fiecare nod păstrează versiunea regulii.</p></div>
-    <div class="c"><div class="n">7</div><h4>Confruntare între documente</h4><p>Două mărimi se compară numai la același concept, aceeași perioadă și aceeași entitate, cu toleranță proprie conceptului.</p></div>
-    <div class="c"><div class="n">8</div><h4>Lanț de amprente</h4><p>Documentele, mărimile și nodurile de calcul se leagă într-un lanț de amprente criptografice, cu puncte de control pentru reluare.</p></div>
-  </div>
-  <div class="stats">
-    <div><div class="n">4 module</div><div class="l">pe un nucleu comun, nu patru aplicații alăturate</div></div>
-    <div><div class="n">1 bază de date</div><div class="l">mărimi canonice, cu monedă, unitate și cadru de raportare</div></div>
-    <div><div class="n">Trasabil</div><div class="l">fiecare valoare păstrează documentul, pagina și zona-sursă</div></div>
-    <div><div class="n">Local</div><div class="l">modelele rulează pe infrastructura societății</div></div>
-  </div>
-</div>
+<section class="sectiune" id="rezolvam">
+  <div class="container">
+    <div class="sectiune-rand">
+      <div class="numeral" aria-hidden="true">I</div>
+      <div class="sectiune-corp">
+        <p class="supratitlu">Ce rezolvăm</p>
+        <h2 class="titlu-sectiune">Trei lucrări care se fac și azi document cu document</h2>
+        <p class="introducere">Obligațiile declarative cer aceleași date, curate, la termene tot mai scurte.
+        Partea de preluare și de punere în formă a documentelor rămâne manuală — și consumă exact timpul pe care
+        l-ar cere analiza.</p>
 
-<!-- FLUX -->
-<div class="block tint">
-  <div class="eyebrow">Fluxul datelor</div>
-  <h2>De la document la rezultat, în opt pași</h2>
-  <p class="lead">
-    Cei patru pași din mijloc — extracția cu ancoră, mărimea canonică, recalcularea și confruntarea —
-    sunt comuni tuturor modulelor. Ce diferă de la un modul la altul este ce se face cu rezultatul.
-  </p>
-  <div class="flow">
-    <div class="s"><b>Pasul 1</b><span>Document primit</span><i>e-Factura, PDF, scan, balanță, extras</i></div>
-    <div class="s"><b>Pasul 2</b><span>Segmentare și OCR</span><i>numai dacă lipsește stratul de text</i></div>
-    <div class="s"><b>Pasul 3</b><span>Extracție și ancoră</span><i>document, pagină, zonă</i></div>
-    <div class="s"><b>Pasul 4</b><span>Mărime canonică</span><i>concept, unitate, monedă, perioadă</i></div>
-    <div class="s"><b>Pasul 5</b><span>Recalculare deterministă</span><i>din mărimile primare, pe graf</i></div>
-    <div class="s"><b>Pasul 6</b><span>Confruntare și raport</span><i>abateri pe trei grade</i></div>
-    <div class="s"><b>Pasul 7</b><span>Lanț de amprente</span><i>amprentă de închidere, reproductibilă</i></div>
-    <div class="s"><b>Pasul 8</b><span>Rezultatul</span><i>dosar, panou, înregistrare, răspuns</i></div>
-  </div>
-  <p class="note">
-    Valorile aflate sub pragul de încredere nu se completează: se marchează și intră în coada
-    profesionistului. Amprenta de închidere a fiecărui dosar arată, la o reluare a calculului, că
-    intrările și rezultatul sunt aceleași.
-  </p>
-</div>
-
-<!-- MODULE -->
-<div class="block" id="modulele">
-  <div class="sect-top">
-    <div>
-      <div class="eyebrow">Modulele</div>
-      <h2>Patru lucrări, aceeași bază de date</h2>
+        <ul class="lista-filet" style="margin-top: var(--sp-48)">
+          <li><h3>Dosarul de due diligence se reface de la zero</h3><p>La vânzarea unei societăți sau a unui activ, pachetul cerut de cumpărător și de finanțator se construiește document cu document: retratarea situațiilor pe mai multe exerciții, ajustările de normalizare a rezultatului, reconcilierea între balanță, bilanț și contracte. Orice schimbare de perimetru sau de perioadă de referință înseamnă reluarea întregii lucrări.</p></li>
+          <li><h3>Fluxul de numerar se vede prea târziu</h3><p>Previziunea de trezorerie este, în cele mai multe societăți mici și mijlocii, o foaie de calcul actualizată manual — deci rar și inegal. Deficitul de lichiditate apare în evidență după ce s-a produs, nu cu trei luni înainte, când încă se poate corecta.</p></li>
+          <li><h3>Aceleași date, cerute de tot mai multe ori</h3><p>RO e-Factura, SAF-T, decontul precompletat de TVA și RO e-Transport se alimentează din aceeași bază. Dacă baza se construiește prin introducere manuală, eroarea se propagă în toate raportările deodată — iar volumul crește mai repede decât numărul profesioniștilor care îl pot duce.</p></li>
+        </ul>
+      </div>
     </div>
   </div>
-  <p class="lead">
-    Fiecare modul are pagina lui, cu intrările pe care le primește, pașii pe care îi parcurge, ce
-    livrează și pragurile de calitate asumate.
-  </p>
-  <div class="mods">
-    <a class="mcard" href="clearfinance.html">
-      <div class="top"><div class="bd">01</div><h3>ClearFinance</h3></div>
-      <p class="role">Contabilitate automată, facturare și încasare</p>
-      <ul><li>Preluare directă a facturilor din RO e-Factura, ca XML, fără recunoaștere optică</li><li>Propunere de cont și de regim de TVA, cu grad de încredere atașat fiecărei propuneri</li><li>Reconciliere a încasărilor și plăților din extras cu facturile emise și primite</li><li>Confruntare a jurnalului înregistrat cu structura D406 și cu decontul de TVA</li></ul>
-      <div class="go">Vezi modulul &rarr;</div>
-    </a>
-    <a class="mcard" href="diligenceiq.html">
-      <div class="top"><div class="bd">02</div><h3>DiligenceIQ</h3></div>
-      <p class="role">Pregătirea vânzării unei societăți sau a unui activ</p>
-      <ul><li>Retratare a situațiilor financiare pe 3–5 exerciții la un model de date unic</li><li>Ajustări de normalizare — elemente nerecurente, cheltuieli care nu continuă, operațiuni cu părți afiliate</li><li>Indicatori calculați din serii, nu preluați din documente</li><li>Confruntare automată pe toate câmpurile, cu abaterile grupate pe trei grade</li></ul>
-      <div class="go">Vezi modulul &rarr;</div>
-    </a>
-    <a class="mcard" href="thetreasurer.html">
-      <div class="top"><div class="bd">03</div><h3>TheTreasurer</h3></div>
-      <p class="role">Fluxul de numerar liber și panoul de urmărire</p>
-      <ul><li>Consolidare pe entitate sau pe grup, inclusiv în valute diferite</li><li>Proiecție de flux de numerar liber pe 12–36 de luni, pe scenarii</li><li>Recalculare lunară din realizat, ca proiecția să nu rămână o fotografie veche</li><li>Alertă pe prag emisă din date, nu din estimare</li></ul>
-      <div class="go">Vezi modulul &rarr;</div>
-    </a>
-    <a class="mcard" href="fiscal-mind.html">
-      <div class="top"><div class="bd">04</div><h3>Fiscal Mind</h3></div>
-      <p class="role">Asistentul administratorului, pe datele propriei firme</p>
-      <ul><li>Sursa răspunsului este exclusiv baza de date normalizată a propriei firme</li><li>Cifra o produce calculul determinist, nu modelul de limbaj</li><li>Un verificator respinge orice afirmație fără acoperire în datele firmei</li><li>O operațiune se execută numai după confirmarea explicită a administratorului</li></ul>
-      <div class="go">Vezi modulul &rarr;</div>
-    </a>
-  </div>
-</div>
+</section>
+<section class="sectiune sectiune--inchisa sectiune--tus sectiune--lat" id="nucleul">
+  <div class="container">
+    <div class="sectiune-rand">
+      <div class="numeral" aria-hidden="true">II</div>
+      <div class="sectiune-corp sectiune-corp--lat">
+        <p class="supratitlu">Nucleul comun</p>
+        <h2 class="titlu-sectiune">Opt componente, un singur strat de date</h2>
+        <p class="introducere">Cele patru module nu sunt aplicații separate puse sub aceeași siglă. Toate
+        interoghează același depozit de mărimi canonice și același motor de calcul: un indicator are aceeași
+        valoare în oricare dintre module, fiindcă provine din același loc și este recalculat după aceeași regulă,
+        în versiunea ei consemnată.</p>
 
-<!-- MULTILINGVISM -->
-<div class="block tint" id="limbi">
-  <div class="eyebrow">Multilingvism</div>
-  <h2>Nu o interfață tradusă, ci trei straturi de echivalare</h2>
-  <p class="lead">
-    Același concept economic poartă denumiri diferite între limbi și între cadrele de raportare, se
-    încadrează în poziții diferite ale situațiilor financiare și se calculează uneori altfel. De aceea
-    problema nu se rezolvă prin traducerea meniurilor.
-  </p>
-  <div class="rows">
-    <div class="row"><div class="ic">A</div><div>
-      <h3>Corpusul terminologic</h3>
-      <p>Echivalențele dintre limbi, construite și revizuite de profesioniști pe fiecare limbă în parte.
-      O limbă nouă se introduce etapizat, pe măsură ce corpusul ei trece pragul de calitate.</p>
-    </div></div>
-    <div class="row"><div class="ic">B</div><div>
-      <h3>Maparea între cadre de raportare</h3>
-      <p>Duce o poziție dintr-un cadru în poziția corespunzătoare din altul, cu regulile de ajustare
-      scrise explicit și versionate — nu deduse de la caz la caz.</p>
-    </div></div>
-    <div class="row"><div class="ic">C</div><div>
-      <h3>Extragerea din documente în limbi diferite</h3>
-      <p>Inclusiv din documente scanate de calitate slabă. Protocolul de evaluare măsoară separat fiecare
-      strat, pe un set de documente de test anonimizat, cu rezultat contabil cunoscut.</p>
-    </div></div>
+        <div class="etape" style="margin-top: var(--sp-48)">
+          <div class="etapa"><div class="etapa-cifra">1</div><div><h3>Ingestie și segmentare</h3><p>Despachetare și segmentare pe pagini și blocuri; recunoaștere optică numai dacă nu există strat de text.</p></div></div>
+          <div class="etapa"><div class="etapa-cifra">2</div><div><h3>Extracție de câmpuri</h3><p>Model rulat local, pe serverul societății: documentele financiare ale clienților nu părăsesc infrastructura.</p></div></div>
+          <div class="etapa"><div class="etapa-cifra">3</div><div><h3>Ancora de proveniență</h3><p>Fiecărei valori i se atașează documentul, pagina și zona din care a fost citită.</p></div></div>
+          <div class="etapa"><div class="etapa-cifra">4</div><div><h3>Normalizare canonică</h3><p>Concept, valoare, unitate și factor de scară, monedă, perioadă, cadru de raportare — plus maparea multilingvă.</p></div></div>
+          <div class="etapa"><div class="etapa-cifra">5</div><div><h3>Depozit de mărimi canonice</h3><p>O singură bază de mărimi primare, din care se servesc toate modulele.</p></div></div>
+          <div class="etapa"><div class="etapa-cifra">6</div><div><h3>Motor de calcul determinist</h3><p>Mărimile derivate se recalculează din cele primare, pe un graf aciclic; fiecare nod păstrează versiunea regulii.</p></div></div>
+          <div class="etapa"><div class="etapa-cifra">7</div><div><h3>Confruntare între documente</h3><p>Două mărimi se compară numai la același concept, aceeași perioadă și aceeași entitate, cu toleranță proprie conceptului.</p></div></div>
+          <div class="etapa"><div class="etapa-cifra">8</div><div><h3>Lanț de amprente</h3><p>Documentele, mărimile și nodurile de calcul se leagă într-un lanț de amprente criptografice, cu puncte de control pentru reluare.</p></div></div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+</section>
+<section class="sectiune" id="fluxul">
+  <div class="container">
+    <div class="sectiune-rand">
+      <div class="numeral" aria-hidden="true">III</div>
+      <div class="sectiune-corp">
+        <p class="supratitlu">Fluxul datelor</p>
+        <h2 class="titlu-sectiune">De la document la rezultat, în opt pași</h2>
+        <p class="introducere">Cei patru pași din mijloc — extracția cu ancoră, mărimea canonică, recalcularea și
+        confruntarea — sunt comuni tuturor modulelor. Ce diferă de la un modul la altul este ce se face cu rezultatul.</p>
 
-<!-- CONTACT -->
-<div class="block tint" id="contact">
-  <div class="eyebrow">Contact</div>
-  <h2>Pentru detalii tehnice sau o discuție de specialitate</h2>
-  <p class="lead">
-    Pagina prezintă platforma și modulele ei. Pentru întrebări privind modelul de date, regulile de
-    confruntare, formatele acceptate sau integrarea cu programul de contabilitate folosit, scrieți sau sunați.
-  </p>
-  <div class="cta-grid">
-    <a href="mailto:ab@andreibalan.com"><span>E-mail</span><strong>ab@andreibalan.com</strong></a>
-    <a href="tel:+40754300895"><span>Telefon</span><strong>0754 300 895</strong></a>
+        <ul class="lista-filet" style="margin-top: var(--sp-48)">
+          <li><h3>1. Document primit</h3><p>e-Factura, PDF, scan, balanță, extras</p></li>
+          <li><h3>2. Segmentare și OCR</h3><p>numai dacă lipsește stratul de text</p></li>
+          <li><h3>3. Extracție și ancoră</h3><p>document, pagină, zonă</p></li>
+          <li><h3>4. Mărime canonică</h3><p>concept, unitate, monedă, perioadă</p></li>
+          <li><h3>5. Recalculare deterministă</h3><p>din mărimile primare, pe graf</p></li>
+          <li><h3>6. Confruntare și raport</h3><p>abateri pe trei grade</p></li>
+          <li><h3>7. Lanț de amprente</h3><p>amprentă de închidere, reproductibilă</p></li>
+          <li><h3>8. Rezultatul</h3><p>dosar, panou, înregistrare, răspuns</p></li>
+        </ul>
+
+        <p class="proza-mica" style="margin-top: var(--sp-40)">Valorile aflate sub pragul de încredere nu se
+        completează: se marchează și intră în coada profesionistului. Amprenta de închidere a fiecărui dosar
+        arată, la o reluare a calculului, că intrările și rezultatul sunt aceleași.</p>
+      </div>
+    </div>
   </div>
-</div>
+</section>
+<section class="sectiune sectiune--lat" id="modulele">
+  <div class="container">
+    <div class="sectiune-rand">
+      <div class="numeral" aria-hidden="true">IV</div>
+      <div class="sectiune-corp sectiune-corp--lat">
+        <p class="supratitlu">Modulele</p>
+        <h2 class="titlu-sectiune">Patru lucrări, aceeași bază de date</h2>
+        <p class="introducere">Fiecare modul are pagina lui, cu intrările pe care le primește, pașii pe care îi
+        parcurge, ce livrează și pragurile de calitate asumate.</p>
 
-<footer>
-  <div class="fcard">
-    <img src="assets/nobill-logo-white.png" alt="NoBill">
-    <div class="fgrid">
+        <div class="fise" style="margin-top: var(--sp-48)">
+          <article class="fisa">
+            <div class="fisa-titlu"><span class="numar">01</span><h3>ClearFinance</h3></div>
+            <p class="introducere">Contabilitate automată, facturare și încasare.</p>
+            <div class="fisa-grila">
+              <div>
+                <h4>Ce face</h4>
+                <p class="proza-mica">Preia documentele primare în forma în care sosesc, propune înregistrarea cu grad de încredere atașat și confruntă jurnalul cu structura declarativă.</p>
+              </div>
+              <div>
+                <h4>Pe scurt</h4>
+                <ul class="lista-puncte"><li>Preluare directă a facturilor din RO e-Factura, ca XML, fără recunoaștere optică</li><li>Propunere de cont și de regim de TVA, cu grad de încredere atașat fiecărei propuneri</li><li>Reconciliere a încasărilor și plăților din extras cu facturile emise și primite</li><li>Confruntare a jurnalului înregistrat cu structura D406 și cu decontul de TVA</li></ul>
+              </div>
+            </div>
+            <p class="actiuni"><a class="legatura" href="clearfinance.html">Pagina modulului ClearFinance</a></p>
+          </article>
+          <article class="fisa">
+            <div class="fisa-titlu"><span class="numar">02</span><h3>DiligenceIQ</h3></div>
+            <p class="introducere">Pregătirea vânzării unei societăți sau a unui activ.</p>
+            <div class="fisa-grila">
+              <div>
+                <h4>Ce face</h4>
+                <p class="proza-mica">Normalizează situațiile pe mai multe exerciții, consemnează ajustările cu motivul lor și confruntă automat pachetul cu el însuși.</p>
+              </div>
+              <div>
+                <h4>Pe scurt</h4>
+                <ul class="lista-puncte"><li>Retratare a situațiilor financiare pe 3–5 exerciții la un model de date unic</li><li>Ajustări de normalizare — elemente nerecurente, cheltuieli care nu continuă, operațiuni cu părți afiliate</li><li>Indicatori calculați din serii, nu preluați din documente</li><li>Confruntare automată pe toate câmpurile, cu abaterile grupate pe trei grade</li></ul>
+              </div>
+            </div>
+            <p class="actiuni"><a class="legatura" href="diligenceiq.html">Pagina modulului DiligenceIQ</a></p>
+          </article>
+          <article class="fisa">
+            <div class="fisa-titlu"><span class="numar">03</span><h3>TheTreasurer</h3></div>
+            <p class="introducere">Fluxul de numerar liber și panoul de urmărire.</p>
+            <div class="fisa-grila">
+              <div>
+                <h4>Ce face</h4>
+                <p class="proza-mica">Construiește proiecția de trezorerie pe scenarii deterministe, compară lunar realizatul cu proiectatul și semnalează pragurile înainte de depășire.</p>
+              </div>
+              <div>
+                <h4>Pe scurt</h4>
+                <ul class="lista-puncte"><li>Consolidare pe entitate sau pe grup, inclusiv în valute diferite</li><li>Proiecție de flux de numerar liber pe 12–36 de luni, pe scenarii</li><li>Recalculare lunară din realizat, ca proiecția să nu rămână o fotografie veche</li><li>Alertă pe prag emisă din date, nu din estimare</li></ul>
+              </div>
+            </div>
+            <p class="actiuni"><a class="legatura" href="thetreasurer.html">Pagina modulului TheTreasurer</a></p>
+          </article>
+          <article class="fisa">
+            <div class="fisa-titlu"><span class="numar">04</span><h3>Fiscal Mind</h3></div>
+            <p class="introducere">Asistentul administratorului, pe datele propriei firme.</p>
+            <div class="fisa-grila">
+              <div>
+                <h4>Ce face</h4>
+                <p class="proza-mica">Răspunde la întrebări concrete exclusiv din datele normalizate ale societății, cu trimitere la documentul-sursă al fiecărei cifre.</p>
+              </div>
+              <div>
+                <h4>Pe scurt</h4>
+                <ul class="lista-puncte"><li>Sursa răspunsului este exclusiv baza de date normalizată a propriei firme</li><li>Cifra o produce calculul determinist, nu modelul de limbaj</li><li>Un verificator respinge orice afirmație fără acoperire în datele firmei</li><li>O operațiune se execută numai după confirmarea explicită a administratorului</li></ul>
+              </div>
+            </div>
+            <p class="actiuni"><a class="legatura" href="fiscal-mind.html">Pagina modulului Fiscal Mind</a></p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="sectiune sectiune--inchisa sectiune--visiniu" id="limbi">
+  <div class="container">
+    <div class="sectiune-rand">
+      <div class="numeral" aria-hidden="true">V</div>
+      <div class="sectiune-corp">
+        <p class="supratitlu">Multilingvism</p>
+        <h2 class="titlu-sectiune">Nu o interfață tradusă, ci trei straturi de echivalare</h2>
+        <p class="introducere">Același concept economic poartă denumiri diferite între limbi și între cadrele de
+        raportare, se încadrează în poziții diferite ale situațiilor financiare și se calculează uneori altfel.
+        De aceea problema nu se rezolvă prin traducerea meniurilor.</p>
+
+        <ul class="lista-filet" style="margin-top: var(--sp-48)">
+          <li><h3>Corpusul terminologic</h3><p>Echivalențele dintre limbi, construite și revizuite de profesioniști pe fiecare limbă în parte. O limbă nouă se introduce etapizat, pe măsură ce corpusul ei trece pragul de calitate.</p></li>
+          <li><h3>Maparea între cadre de raportare</h3><p>Duce o poziție dintr-un cadru în poziția corespunzătoare din altul, cu regulile de ajustare scrise explicit și versionate — nu deduse de la caz la caz.</p></li>
+          <li><h3>Extragerea din documente în limbi diferite</h3><p>Inclusiv din documente scanate de calitate slabă. Protocolul de evaluare măsoară separat fiecare strat, pe un set de documente de test anonimizat, cu rezultat contabil cunoscut.</p></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="sectiune">
+  <div class="container">
+    <div class="sectiune-rand">
+      <div class="numeral" aria-hidden="true">VI</div>
+      <div class="sectiune-corp">
+        <p class="supratitlu">Contact</p>
+        <h2 class="titlu-sectiune">Pentru detalii tehnice sau o discuție de specialitate</h2>
+        <p class="introducere">Pagina prezintă platforma și modulele ei. Pentru întrebări privind modelul de date,
+        regulile de confruntare, formatele acceptate sau integrarea cu programul de contabilitate folosit,
+        scrieți sau sunați.</p>
+
+        <dl class="date-lista" style="margin-top: var(--sp-48)">
+          <div><dt>E-mail</dt><dd><a href="mailto:ab@andreibalan.com">ab@andreibalan.com</a></dd></div>
+          <div><dt>Telefon</dt><dd><a href="tel:+40754300895">0754 300 895</a></dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="subsol">
+  <div class="container">
+    <div class="subsol-grila">
       <div>
-        <h6>Platforma</h6>
-        <p style="max-width:46ch">
-          Patru module pe un nucleu comun de preluare, normalizare și calcul al datelor financiare.
-          Fiecare valoare păstrează trimiterea la documentul-sursă; ce nu poate fi legat de o sursă nu se afișează.
+        <img src="assets/nobill-logo-white.png" alt="NoBill" width="44" height="22">
+        <p class="proza-mica">Patru module pe un nucleu comun de preluare, normalizare și calcul al datelor
+        financiare. Fiecare valoare păstrează trimiterea la documentul-sursă.</p>
+        <p class="proza-mica" style="margin-top: var(--sp-16)">
+          <a href="mailto:ab@andreibalan.com">ab@andreibalan.com</a><br>
+          <a href="tel:+40754300895">0754 300 895</a>
         </p>
       </div>
       <div>
-        <h6>Modulele</h6>
-        <ul><li><a href="clearfinance.html">ClearFinance</a></li><li><a href="diligenceiq.html">DiligenceIQ</a></li><li><a href="thetreasurer.html">TheTreasurer</a></li><li><a href="fiscal-mind.html">Fiscal Mind</a></li></ul>
+        <h2>Platforma</h2>
+        <ul>
+          <li><a href="index.html#rezolvam">Ce rezolvăm</a></li>
+          <li><a href="index.html#nucleul">Nucleul comun</a></li>
+          <li><a href="index.html#fluxul">Fluxul datelor</a></li>
+          <li><a href="index.html#limbi">Multilingvism</a></li>
+        </ul>
       </div>
       <div>
-        <h6>Informații legale</h6>
-        <p>
-          Operator: DRAGOSTE LA PĂTRAT S.R.L.<br>
-          CUI 50804257 · J2024036790007<br>
-          satul Lanurile, comuna Bărăganu, județul Constanța<br>
-          <a href="https://anpc.ro/ce-este-sal/" target="_blank" rel="noopener">ANPC — SAL</a> ·
-          <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">SOL</a>
-        </p>
+        <h2>Modulele</h2>
+        <ul>
+              <li><a href="clearfinance.html">ClearFinance</a></li>
+              <li><a href="diligenceiq.html">DiligenceIQ</a></li>
+              <li><a href="thetreasurer.html">TheTreasurer</a></li>
+              <li><a href="fiscal-mind.html">Fiscal Mind</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Contact</h2>
+        <ul>
+          <li><a href="mailto:ab@andreibalan.com">ab@andreibalan.com</a></li>
+          <li><a href="tel:+40754300895">0754 300 895</a></li>
+          <li><a href="https://anpc.ro/ce-este-sal/" target="_blank" rel="noopener">ANPC — SAL</a></li>
+          <li><a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">SOL</a></li>
+        </ul>
       </div>
     </div>
-    <div class="legal">
-      Pagina are caracter exclusiv de prezentare și nu constituie ofertă, consultanță fiscală, juridică
-      sau contabilă. Platforma este un instrument de sprijin al profesioniștilor: nu emite opinii de audit
-      și nu certifică situații financiare, nu acordă consultanță fiscală sau juridică și nu ține
-      contabilitatea pentru terți — activități rezervate auditorilor financiari, persoanelor înscrise în
-      Registrul Camerei Consultanților Fiscali și, respectiv, membrilor CECCAR. Decizia și răspunderea
-      rămân ale profesionistului sau ale administratorului.
-      Site-ul nu folosește cookie-uri de analiză sau de publicitate, nu conține formulare și nu colectează
-      date cu caracter personal; o adresă de e-mail transmisă direct se prelucrează exclusiv pentru a
-      răspunde, în temeiul art. 6 alin. (1) lit. f) din Regulamentul (UE) 2016/679.
-      © 2026. Toate drepturile rezervate.
+
+    <p class="proza-mica" style="margin-top: var(--sp-32); max-width: none">
+      Pagina are caracter exclusiv de prezentare și nu constituie ofertă, consultanță fiscală, juridică sau
+      contabilă. Platforma este un instrument de sprijin al profesioniștilor: nu emite opinii de audit și nu
+      certifică situații financiare, nu acordă consultanță fiscală sau juridică și nu ține contabilitatea pentru
+      terți — activități rezervate auditorilor financiari, persoanelor înscrise în Registrul Camerei
+      Consultanților Fiscali și, respectiv, membrilor CECCAR. Decizia și răspunderea rămân ale profesionistului
+      sau ale administratorului. Site-ul nu folosește cookie-uri de analiză sau de publicitate, nu conține
+      formulare și nu colectează date cu caracter personal; o adresă de e-mail transmisă direct se prelucrează
+      exclusiv pentru a răspunde, în temeiul art. 6 alin. (1) lit. f) din Regulamentul (UE) 2016/679.
+    </p>
+
+    <div class="subsol-jos">
+      <span>© 2026 NoBill. Toate drepturile rezervate.</span>
+      <span>DRAGOSTE LA PĂTRAT S.R.L. · CUI 50804257 · J2024036790007 · satul Lanurile, comuna Bărăganu, județul Constanța</span>
     </div>
   </div>
 </footer>
+</div>
 </body>
 </html>

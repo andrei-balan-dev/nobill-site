@@ -1,0 +1,275 @@
+/* Valoris — cadrul paginii: container, antet, navigatie, subsol, sectiuni. */
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  /*
+    Pe telefoanele cu decupaj, tinute orizontal, marginea paginii cade sub
+    crestatura. Se ia cea mai mare dintre marginea paginii si zona sigura;
+    unde nu exista zone sigure, env() da zero si marginea ramane cea stiuta.
+  */
+  padding-inline:
+    max(var(--margine-pagina), env(safe-area-inset-left))
+    max(var(--margine-pagina), env(safe-area-inset-right));
+}
+
+.pagina {
+  /* Randul cu vh e pentru browserele de telefon mai vechi, care nu stiu dvh
+     si il lasa nefolosit. */
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.continut { flex: 1 0 auto; }
+
+/* ---------- Antet ---------- */
+
+.antet {
+  /* Banda de sus, ca pe o hartie cu antet. Singurul loc in care visiniul
+     apare ca suprafata pe fundal deschis. */
+  border-top: 4px solid var(--visiniu);
+  border-bottom: 1px solid var(--filet);
+  background: var(--crem);
+}
+
+.antet-rand {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-32);
+  min-height: 86px;
+}
+
+/* Marca la stanga, navigatia si comutatorul impinse impreuna in dreapta.
+   Nu `space-between`: randul are trei copii, iar navigatia ar ramane la mijloc. */
+.navigatie { margin-left: auto; }
+
+.marca { display: inline-flex; align-items: center; }
+
+.marca img {
+  height: 26px;
+  width: auto;
+}
+
+.navigatie ul {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-32);
+}
+
+.navigatie a {
+  font-size: var(--t-05);
+  text-decoration: none;
+  color: var(--tus);
+  padding-block: var(--sp-8);
+  border-bottom: 1px solid transparent;
+}
+
+.navigatie a[aria-current="page"] {
+  border-bottom-color: var(--visiniu);
+  color: var(--visiniu);
+}
+
+.limba {
+  font-size: var(--t-mic);
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--gri);
+  text-decoration: none;
+  padding-left: var(--sp-32);
+  border-left: 1px solid var(--filet);
+}
+
+/*
+  Pe telefon antetul se aseaza pe doua randuri, aliniate la stanga ca tot
+  restul paginii: marca si comutatorul de limba sus, cele patru intrari
+  dedesubt. Inainte erau trei randuri centrate, cu comutatorul singur pe
+  ultimul; antetul lua 164 px dintr-un ecran de 812 si impingea titlul in jos.
+  Cele patru intrari masoara 289 px cu tot cu spatii, deci incap pe un rand in
+  cei 327 px ai containerului. Fara meniu-hamburger: nu are ce ascunde.
+*/
+@media (max-width: 900px) {
+  .antet-rand {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: var(--sp-12) var(--sp-16);
+    min-height: 0;
+    padding-block: var(--sp-16);
+  }
+
+  .marca { grid-area: 1 / 1; }
+
+  .navigatie {
+    grid-area: 2 / 1 / auto / -1;
+    margin-left: 0;
+  }
+
+  .navigatie ul {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 0 var(--sp-16);
+  }
+
+  /*
+    Degetul cere mai mult decat ochiul: intrarile cresc la 44 de puncte. Aerul
+    in plus ar cobori insa filetul intrarii curente pana la marginea de jos a
+    zonei de atingere, departe de cuvant, asa ca acolo filetul se schimba in
+    subliniere, care sta lipita de litere.
+  */
+  .navigatie a { padding-block: var(--sp-12); border-bottom: 0; }
+
+  .navigatie a[aria-current="page"] {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.3em;
+  }
+
+  /* Pe randul marcii, la capatul din dreapta. Filetul din stanga ar atarna
+     in gol acolo, deci dispare. */
+  .limba {
+    grid-area: 1 / 2;
+    justify-self: end;
+    padding-left: 0;
+    border-left: 0;
+  }
+}
+
+/* ---------- Sectiuni cu numeral roman in gutiera ---------- */
+
+.sectiune {
+  padding-block: var(--sp-96);
+  border-top: 1px solid var(--linie);
+}
+
+.sectiune:first-of-type { border-top: 0; }
+
+.sectiune-rand {
+  display: grid;
+  grid-template-columns: var(--gutiera) minmax(0, 1fr);
+}
+
+.numeral {
+  font-family: var(--serif);
+  font-size: var(--t-3);
+  color: var(--accent);
+  line-height: var(--lh-mare);
+  padding-top: 0.25em;
+}
+
+.sectiune-corp { max-width: var(--coloana); }
+.sectiune-corp--lat { max-width: none; }
+
+/* O sectiune pe trei coloane nu incape in masura obisnuita de citit. */
+.sectiune--lat .container { max-width: 1400px; }
+
+@media (max-width: 900px) {
+  .sectiune { padding-block: var(--sp-64); }
+  .sectiune-rand { grid-template-columns: minmax(0, 1fr); }
+  .numeral { padding-top: 0; padding-bottom: var(--sp-12); }
+}
+
+/* ---------- Sectiuni pe fundal inchis ---------- */
+
+/*
+  Purtarea e comuna; difera numai fundalul. Pe amandoua se scrie exclusiv cu
+  crem: pe tus da 16,17, pe visiniu 9,69. Visiniul pe tus ar da 1,67, deci
+  accentul dispare si el pe fundal inchis.
+*/
+.sectiune--inchisa {
+  background: var(--fundal);
+  color: var(--cerneala);
+  border-top: 0;
+
+  /* Rolurile comune celor doua fundaluri inchise. Cerneala si accentul sunt
+     cremul intreg; eticheta si textul secundar, acelasi crem stins peste
+     fundal, dat ca valoare plina, ca sa se poata interpola. */
+  --cerneala: var(--crem);
+  --accent: var(--crem);
+  --linie: var(--filet-crem);
+  --linie-tare: rgba(242, 240, 236, 0.45);
+  --panza-loc: rgba(242, 240, 236, 0.06);
+}
+
+.sectiune--tus {
+  --fundal: var(--tus);
+  --cerneala-stinsa: #B2B1B6;   /* crem 72% peste tus */
+  --eticheta: #A4A3AA;          /* crem 66% peste tus */
+}
+
+.sectiune--visiniu {
+  --fundal: var(--visiniu);
+  --cerneala-stinsa: #B5ADDC;   /* crem 72% peste albastru */
+  --eticheta: #A89FD8;          /* crem 66% peste albastru */
+}
+
+.sectiune--inchisa a { color: var(--cerneala); }
+.sectiune--inchisa a:hover { color: var(--cerneala); text-decoration-thickness: 2px; }
+
+/*
+  ---------- Sectiunea care isi schimba culoarea la derulare ----------
+
+  Fundalul si rolurile vin din javascript, ca valori interpolate intre crem,
+  visiniu si tus; aici se declara numai ca sectiunea se picteaza singura.
+  Cat timp javascriptul nu a rulat, rolurile sunt cele de la :root, adica
+  sectiunea arata ca pana acum, pe crem.
+*/
+.sectiune--trecere {
+  background: var(--fundal);
+  color: var(--cerneala);
+  /* Ca la sectiunile inchise: capatul de sus il face schimbarea de culoare,
+     nu un filet, care oricum ar fi ramas suspendat cand sectiunea porneste
+     pe crem si cea de deasupra e visinie. */
+  border-top: 0;
+}
+
+/* ---------- Subsol ---------- */
+
+.subsol {
+  background: var(--tus);
+  color: var(--crem);
+  padding-block: var(--sp-80) var(--sp-40);
+  font-size: var(--t-05);
+}
+
+.subsol-grila {
+  display: grid;
+  /* Marca plus cele trei coloane de legaturi. */
+  grid-template-columns: minmax(0, 1.6fr) repeat(3, minmax(0, 1fr));
+  gap: var(--sp-48);
+  padding-bottom: var(--sp-48);
+  border-bottom: 1px solid var(--filet-crem);
+}
+
+.subsol img { height: 22px; width: auto; margin-bottom: var(--sp-24); }
+
+.subsol h2 {
+  font-family: var(--sans);
+  font-size: var(--t-mic);
+  font-weight: 600;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--crem);
+  opacity: 0.62;
+  margin-bottom: var(--sp-16);
+}
+
+.subsol ul { display: flex; flex-direction: column; gap: var(--sp-8); }
+.subsol a { text-decoration: none; }
+.subsol a:hover { color: var(--crem); text-decoration: underline; }
+
+.subsol-jos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--sp-16);
+  padding-top: var(--sp-24);
+  font-size: var(--t-mic);
+  opacity: 0.62;
+}
+
+@media (max-width: 900px) {
+  .subsol-grila { grid-template-columns: minmax(0, 1fr); gap: var(--sp-32); }
+}

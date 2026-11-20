@@ -1,0 +1,100 @@
+/*
+  NoBill - tokenuri de design.
+  Culorile vin din "README - ghid rebranding.md" si nu se deriva.
+  Nicio valoare de culoare, marime sau spatiere nu se scrie in componente.
+*/
+
+:root {
+  /* ---- Culori ---- */
+  --crem: #F2F1EE;
+  --tus: #0E0B26;
+  --visiniu: #1800AD;
+  --gri: #6B6B70;
+
+  /* Singurele derivate admise: filete si fundaluri foarte slabe. */
+  --filet: rgba(14, 11, 38, 0.13);
+  --filet-tare: rgba(14, 11, 38, 0.28);
+  --filet-crem: rgba(242, 241, 238, 0.28);
+  --panza: rgba(14, 11, 38, 0.028);
+
+  /*
+    Contraste masurate (WCAG 2.1):
+      pe crem  — tus 16,17 · visiniu 9,69 · gri 4,66
+      pe tus   — crem 16,17 · gri 3,47 (pica) · visiniu 1,67 (pica)
+    Pe fundal inchis se foloseste exclusiv cremul.
+  */
+
+  /*
+    ---- Rolurile culorii ----
+
+    Blocurile de continut nu mai scriu culori de brand, ci roluri: cerneala,
+    accent, eticheta, filete. Aici rolurile poarta valorile de pe crem, adica
+    exact ce se vedea pana acum. O sectiune pe fundal inchis le rescrie o
+    singura data, in layout.css, iar sectiunea care isi schimba culoarea la
+    derulare le rescrie din javascript, cu valori interpolate. Asa scrisul,
+    filetele si desenele urmeaza fundalul fara sa stie nimic despre el.
+  */
+  --fundal: var(--crem);
+  --cerneala: var(--tus);
+  --cerneala-stinsa: var(--gri);
+  --accent: var(--visiniu);
+  --eticheta: var(--visiniu);
+  --linie: var(--filet);
+  --linie-tare: var(--filet-tare);
+  --panza-loc: var(--panza);
+
+  /* ---- Tipografie. Corp 17 px. ---- */
+  --t-mic: 0.8125rem;                                       /* 13 — supratitluri */
+  --t-05: 0.9375rem;                                        /* 15 */
+  --t-1: 1.0625rem;                                         /* 17 */
+  --t-2: 1.1875rem;                                         /* 19 */
+  --t-3: 1.375rem;                                          /* 22 */
+  --t-4: clamp(1.375rem, 1.10rem + 1.2vw, 1.75rem);         /* 22 → 28 */
+  --t-5: clamp(1.5rem, 1.05rem + 2.0vw, 2.25rem);           /* 24 → 36 */
+  --t-6: clamp(1.75rem, 1.10rem + 2.9vw, 2.875rem);         /* 28 → 46 */
+  --t-7: clamp(2.125rem, 1.15rem + 4.4vw, 3.75rem);         /* 34 → 60 */
+
+  --lh-corp: 1.65;
+  --lh-mediu: 1.45;
+  --lh-titlu: 1.20;
+  --lh-mare: 1.10;
+
+  --serif: "CMU Serif", Georgia, "Times New Roman", serif;
+  --sans: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+
+  /* ---- Spatiere. Baza 8. ---- */
+  --sp-4: 0.25rem;
+  --sp-8: 0.5rem;
+  --sp-12: 0.75rem;
+  --sp-16: 1rem;
+  --sp-24: 1.5rem;
+  --sp-32: 2rem;
+  --sp-40: 2.5rem;
+  --sp-48: 3rem;
+  --sp-64: 4rem;
+  --sp-80: 5rem;
+  --sp-96: 6rem;
+  --sp-128: 8rem;
+  --sp-160: 10rem;
+
+  /* ---- Layout ---- */
+  --container: 1160px;
+  --gutiera: 104px;      /* coloana marginala a numeralelor romane */
+  --coloana: 840px;      /* latimea maxima a coloanei de text */
+  --masura: 33em;        /* ~66 de caractere la marimea elementului */
+  --margine-pagina: var(--sp-48);
+
+  /* ---- Miscare. Singurele tranzitii din site, ambele pe culoare. ---- */
+  --tranzitie: 120ms linear;
+}
+
+@media (max-width: 900px) {
+  :root {
+    --gutiera: 0px;
+    --margine-pagina: var(--sp-24);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --tranzitie: 0ms; }
+}
